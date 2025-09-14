@@ -21,16 +21,14 @@ This is a simple 2D fluid dynamics simulator based on the **Lattice Boltzmann Me
 ### Some demos
 
   
-<video src="examples/block.mp4" width="600" controls></video>
+https://github.com/bshk003/lbm-fluid-sim/blob/main/examples/block.mp4
 
+https://github.com/bshk003/lbm-fluid-sim/blob/main/examples/chamber.mp4
 
-<video src="examples/chamber.mp4" width="600" controls></video>
+https://github.com/bshk003/lbm-fluid-sim/blob/main/examples/boltzmann.mp4
 
-<video src="examples/segment.mp4" width="600" controls></video>
+https://github.com/bshk003/lbm-fluid-sim/blob/main/examples/boltzmann_2.mp4
 
-<video src="examples/boltzmann.mp4" width="600" controls></video>
-
-<video src="examples/boltzmann_2.mp4" width="600" controls></video>
 ---
 
 ### Usage
