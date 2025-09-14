@@ -16,13 +16,7 @@ This is a simple 2D fluid dynamics simulator based on the **Lattice Boltzmann Me
 - Video recording using FFmpeg.
 - Configurable via YAML: simulation parameters, visualization, tracers, etc.
 
----
-
-### Some demos
-
-<video src="https://github.com/bshk003/lbm-fluid-sim/blob/main/examples/boltzmann.mp4" controls></video>
-
-<video src="https://github.com/bshk003/lbm-fluid-sim/blob/main/examples/boltzmann_2.mp4" controls></video>
+Demos can be found in the `examples/`.
 
 ---
 
