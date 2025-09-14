@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "shaders.h"
 
-Renderer::Renderer(int width, int height, int grid_width, int grid_height) 
+Renderer::Renderer(size_t width, size_t height, size_t grid_width, size_t grid_height) 
     : m_width(width), m_height(height), m_grid_width(grid_width), m_grid_height(grid_height)
 {
     if (!glfwInit()) { throw std::runtime_error("Failed to initialize GLFW"); }
@@ -24,7 +24,8 @@ Renderer::Renderer(int width, int height, int grid_width, int grid_height)
 
 Renderer::~Renderer()
 {
-    glDeleteTextures(1, &m_textureID);
+    glDeleteTextures(1, &m_fieldTex);
+    glDeleteTextures(1, &m_obstacleTex);
     glDeleteProgram(m_shader_program);
     glDeleteVertexArrays(1, &m_vao);
     glDeleteBuffers(1, &m_vbo);
@@ -34,49 +35,13 @@ Renderer::~Renderer()
     glfwTerminate();
 }
 
-// Helpers: shader compilation, program linking
-
-GLuint Renderer::compile_shader(const char* shader_src, GLenum type)
-{
-    GLuint shader = glCreateShader(type);
-    glShaderSource(shader, 1, &shader_src, nullptr);
-    glCompileShader(shader);
-
-    int success;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-    if (!success) 
-    {
-        char infoLog[512];
-        glGetShaderInfoLog(shader, 512, nullptr, infoLog);
-        throw std::runtime_error(std::string("Shader compilation error: ") + infoLog);
-    }
-    return shader;
-}
-
-GLuint Renderer::create_program(GLuint vertex_shader, GLuint fragment_shader)
-{
-    GLuint program = glCreateProgram();
-    glAttachShader(program, vertex_shader);
-    glAttachShader(program, fragment_shader);
-    glLinkProgram(program);
-
-    int success;
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-    if (!success) 
-    {
-        char infoLog[512];
-        glGetProgramInfoLog(program, 512, nullptr, infoLog);
-        throw std::runtime_error(std::string("Program linking error: ") + infoLog);
-    }
-    return program;
-}
 
 void Renderer::init()
 {    
     glfwMakeContextCurrent(m_window);
     glewInit();
     glViewport(0, 0, m_width, m_height);
-
+    
     // Compile and link shaders
     GLuint vertex_shader = compile_shader(vertex_shader_src, GL_VERTEX_SHADER);
     GLuint fragment_shader = compile_shader(fragment_shader_src, GL_FRAGMENT_SHADER);
@@ -119,43 +84,91 @@ void Renderer::init()
     // How to interpret the vertex data: texcoords (location 1)
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, stride, (void*)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
-    
-    glGenTextures(1, &m_textureID);
-    glBindTexture(GL_TEXTURE_2D, m_textureID);
-    
-    // What to do when texcoords are out of bounds
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-    // What to do when texture is minified/magnified
+    // Scalar field texture
+    glGenTextures(1, &m_fieldTex);
+    glBindTexture(GL_TEXTURE_2D, m_fieldTex);
+    // Minimization/magnification filters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
     // Allocate texture memory; "GL_R32F" -- use a single float channel per pixel
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_R32F, m_grid_width, m_grid_height, 0, GL_RED, GL_FLOAT, nullptr);    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_R32F, m_grid_width, m_grid_height, 0, GL_RED, GL_FLOAT, nullptr);
+
+    // Obstacle mask texture
+    glGenTextures(1, &m_obstacleTex);
+    glBindTexture(GL_TEXTURE_2D, m_obstacleTex);
+    // Minimization/magnification filters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // Allocate texture memory; "GL_R32F" -- use a single float channel per pixel
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_R32F, m_grid_width, m_grid_height, 0, GL_RED, GL_FLOAT, nullptr);
+    
 }
 
-
-void Renderer::render(std::vector<float>& density)
+void Renderer::render(const std::vector<float>& scalar_field, 
+                      const std::vector<float>& obstacle_mask)
 {
-    if (density.size() != m_grid_width * m_grid_height) {
-        throw std::runtime_error("Wrong density array size");
-    }
+    if (scalar_field.size() != m_grid_width * m_grid_height) 
+        throw std::runtime_error("Grid dimensions do not match the scalar field size");
 
     glClear(GL_COLOR_BUFFER_BIT);
 
     glUseProgram(m_shader_program);
-    glBindVertexArray(m_vao);
 
-    // Make texture available to the shader
+    // Update scalar field texture
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, m_textureID);
+    glBindTexture(GL_TEXTURE_2D, m_fieldTex);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_grid_width, m_grid_height,
+                    GL_RED, GL_FLOAT, scalar_field.data());
+    glUniform1i(glGetUniformLocation(m_shader_program, "scalarTex"), 0);
 
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_grid_width, m_grid_height, GL_RED, GL_FLOAT, density.data());
-    glUniform1i(glGetUniformLocation(m_shader_program, "tex"), 0); // "0" here is the texture unit
+    // Update obstacle mask texture
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, m_obstacleTex);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, m_grid_width, m_grid_height,
+                    GL_RED, GL_FLOAT, obstacle_mask.data());
+    glUniform1i(glGetUniformLocation(m_shader_program, "obstacleTex"), 1);
 
+    glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-    glfwSwapBuffers(m_window);
+    //glfwSwapBuffers(m_window);
     glfwPollEvents();
+}
+
+// Helpers: shader compilation, program linking
+
+GLuint compile_shader(const char* shader_src, GLenum type)
+{
+    GLuint shader = glCreateShader(type);
+    glShaderSource(shader, 1, &shader_src, nullptr);
+    glCompileShader(shader);
+
+    int success;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+    if (!success) 
+    {
+        char infoLog[512];
+        glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+        throw std::runtime_error(std::string("Shader compilation error: ") + infoLog);
+    }
+    return shader;
+}
+
+GLuint create_program(GLuint vertex_shader, GLuint fragment_shader)
+{
+    GLuint program = glCreateProgram();
+    glAttachShader(program, vertex_shader);
+    glAttachShader(program, fragment_shader);
+    glLinkProgram(program);
+
+    int success;
+    glGetProgramiv(program, GL_LINK_STATUS, &success);
+    if (!success) 
+    {
+        char infoLog[512];
+        glGetProgramInfoLog(program, 512, nullptr, infoLog);
+        throw std::runtime_error(std::string("Program linking error: ") + infoLog);
+    }
+    return program;
 }

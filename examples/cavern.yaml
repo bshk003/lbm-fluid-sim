@@ -1,0 +1,32 @@
+simulation_params:
+  viscosity: 0.08
+
+# Periodic boundary conditions for the grid
+periodicity:
+  x: false
+  y: false
+
+# Defines the initial conditions based on a bitmap image
+color_map:
+  map_filename: "cavern.png"
+  colors:
+    - hex: "#FFFFFF"
+      type: "FLUID"
+      initial_rho: 1.0
+      initial_u: [0.1, 0.0]
+    - hex: "#000000"
+      type: "SOLID"
+
+
+# Visualization and rendering parameters
+render:
+  render_window_size: [500, 500]
+  steps_per_frame: 3
+  render_quantities:
+    - quantity: "speed" # "density", "speed", "vorticity"
+      offset: 0.0 # the reference value where the zero of the rendered quantity maps to in [0.0, 1.0]
+      amplitude: 0.1 # expected amplitude
+    - quantity: "vorticity" # "density", "speed", "vorticity"
+      offset: 0.5 # the reference value where the zero of the rendered quantity maps to in [0.0, 1.0]
+      amplitude: 0.1 # expected amplitude
+  

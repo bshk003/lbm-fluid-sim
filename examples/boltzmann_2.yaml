@@ -1,0 +1,43 @@
+simulation_params:
+  viscosity: 0.03
+
+# Periodic boundary conditions for the grid
+periodicity:
+  x: false
+  y: true
+
+# Defines the initial conditions based on a bitmap image
+color_map:
+  map_filename: "boltzmann_2.png"
+  colors:
+    - color: "#FFFFFF"
+      type: "FLUID"
+      initial_rho: 1.0
+      initial_u: [0.0, 0.0]
+    - color: "#000000"
+      type: "SOLID"
+    - color: "#00FF00"
+      type: "INFLOW"
+      initial_rho: 1.0
+      initial_u: [0.1, 0.0]
+
+
+# Parameters for tracers rendering and deployment
+tracers:
+  color: "#800080"
+  size: 4.0
+  emission_rate: 0.008
+  random_initial: 0
+
+# Visualization and rendering parameters
+render:
+  render_window_size: [900, 300]
+  steps_per_frame: 1
+  render_quantities:
+    - quantity: "speed" # "density", "speed", "vorticity"
+      offset: 0.0 # the reference value where the zero of the rendered quantity maps to in [0.0, 1.0]
+      amplitude: 0.2 # expected amplitude
+    - quantity: "vorticity" # "density", "speed", "vorticity"
+      offset: 0.5 # the reference value where the zero of the rendered quantity maps to in [0.0, 1.0]
+      amplitude: 0.1 # expected amplitude
+  

@@ -1,0 +1,38 @@
+simulation_params:
+  viscosity: 0.08
+
+# Periodic boundary conditions for the grid
+periodicity:
+  x: false
+  y: false
+
+# Defines the initial conditions based on a bitmap image
+color_map:
+  map_filename: "nozzle.png"
+  colors:
+    - hex: "#FFFFFF"
+      type: "FLUID"
+      initial_rho: 1.0
+      initial_u: [0.06, 0.0]
+    - hex: "#000000"
+      type: "SOLID"
+    - hex: "#00FF00"
+      type: "INFLOW"
+      initial_rho: 1.0
+      initial_u: [0.08, 0.0]
+    - hex: "#FF00FF"
+      type: "OUTFLOW"
+      initial_rho: 0.001
+
+# Visualization and rendering parameters
+render:
+  render_window_size: [800, 320]
+  steps_per_frame: 1
+  render_quantities:
+    - quantity: "speed" # "density", "speed", "vorticity"
+      offset: 0.0 # the reference value where the zero of the rendered quantity maps to in [0.0, 1.0]
+      amplitude: 0.2 # expected amplitude
+    - quantity: "vorticity" # "density", "speed", "vorticity"
+      offset: 0.5 # the reference value where the zero of the rendered quantity maps to in [0.0, 1.0]
+      amplitude: 0.1 # expected amplitude
+  

@@ -7,7 +7,9 @@ find_package(OpenGL REQUIRED)
 find_package(glfw3 3.3 REQUIRED)
 find_package(GLEW REQUIRED)
 
-add_executable(lbm-fluid-sim src/main.cpp src/renderer.cpp src/d2q9.cpp src/simulation_setup.cpp)
+add_executable(lbm-fluid-sim src/main.cpp src/renderer.cpp 
+                             src/d2q9.cpp src/d2q9_setup.cpp 
+                             src/d2q9_observables.cpp src/tracers_collection.cpp)
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
 

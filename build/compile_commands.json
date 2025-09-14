@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/home/dennis/Projects/lbm-fluid-sim/build",
+  "command": "/usr/bin/g++  -I/home/dennis/Projects/lbm-fluid-sim/include -g -std=gnu++17 -o CMakeFiles/lbm-fluid-sim.dir/src/main.cpp.o -c /home/dennis/Projects/lbm-fluid-sim/src/main.cpp",
+  "file": "/home/dennis/Projects/lbm-fluid-sim/src/main.cpp",
+  "output": "CMakeFiles/lbm-fluid-sim.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/dennis/Projects/lbm-fluid-sim/build",
+  "command": "/usr/bin/g++  -I/home/dennis/Projects/lbm-fluid-sim/include -g -std=gnu++17 -o CMakeFiles/lbm-fluid-sim.dir/src/renderer.cpp.o -c /home/dennis/Projects/lbm-fluid-sim/src/renderer.cpp",
+  "file": "/home/dennis/Projects/lbm-fluid-sim/src/renderer.cpp",
+  "output": "CMakeFiles/lbm-fluid-sim.dir/src/renderer.cpp.o"
+},
+{
+  "directory": "/home/dennis/Projects/lbm-fluid-sim/build",
+  "command": "/usr/bin/g++  -I/home/dennis/Projects/lbm-fluid-sim/include -g -std=gnu++17 -o CMakeFiles/lbm-fluid-sim.dir/src/d2q9.cpp.o -c /home/dennis/Projects/lbm-fluid-sim/src/d2q9.cpp",
+  "file": "/home/dennis/Projects/lbm-fluid-sim/src/d2q9.cpp",
+  "output": "CMakeFiles/lbm-fluid-sim.dir/src/d2q9.cpp.o"
+},
+{
+  "directory": "/home/dennis/Projects/lbm-fluid-sim/build",
+  "command": "/usr/bin/g++  -I/home/dennis/Projects/lbm-fluid-sim/include -g -std=gnu++17 -o CMakeFiles/lbm-fluid-sim.dir/src/d2q9_setup.cpp.o -c /home/dennis/Projects/lbm-fluid-sim/src/d2q9_setup.cpp",
+  "file": "/home/dennis/Projects/lbm-fluid-sim/src/d2q9_setup.cpp",
+  "output": "CMakeFiles/lbm-fluid-sim.dir/src/d2q9_setup.cpp.o"
+},
+{
+  "directory": "/home/dennis/Projects/lbm-fluid-sim/build",
+  "command": "/usr/bin/g++  -I/home/dennis/Projects/lbm-fluid-sim/include -g -std=gnu++17 -o CMakeFiles/lbm-fluid-sim.dir/src/d2q9_observables.cpp.o -c /home/dennis/Projects/lbm-fluid-sim/src/d2q9_observables.cpp",
+  "file": "/home/dennis/Projects/lbm-fluid-sim/src/d2q9_observables.cpp",
+  "output": "CMakeFiles/lbm-fluid-sim.dir/src/d2q9_observables.cpp.o"
+},
+{
+  "directory": "/home/dennis/Projects/lbm-fluid-sim/build",
+  "command": "/usr/bin/g++  -I/home/dennis/Projects/lbm-fluid-sim/include -g -std=gnu++17 -o CMakeFiles/lbm-fluid-sim.dir/src/tracers_collection.cpp.o -c /home/dennis/Projects/lbm-fluid-sim/src/tracers_collection.cpp",
+  "file": "/home/dennis/Projects/lbm-fluid-sim/src/tracers_collection.cpp",
+  "output": "CMakeFiles/lbm-fluid-sim.dir/src/tracers_collection.cpp.o"
+}
+]

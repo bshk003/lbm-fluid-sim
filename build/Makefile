@@ -153,6 +153,54 @@ src/d2q9.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/d2q9.cpp.s
 .PHONY : src/d2q9.cpp.s
 
+src/d2q9_observables.o: src/d2q9_observables.cpp.o
+.PHONY : src/d2q9_observables.o
+
+# target to build an object file
+src/d2q9_observables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/d2q9_observables.cpp.o
+.PHONY : src/d2q9_observables.cpp.o
+
+src/d2q9_observables.i: src/d2q9_observables.cpp.i
+.PHONY : src/d2q9_observables.i
+
+# target to preprocess a source file
+src/d2q9_observables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/d2q9_observables.cpp.i
+.PHONY : src/d2q9_observables.cpp.i
+
+src/d2q9_observables.s: src/d2q9_observables.cpp.s
+.PHONY : src/d2q9_observables.s
+
+# target to generate assembly for a file
+src/d2q9_observables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/d2q9_observables.cpp.s
+.PHONY : src/d2q9_observables.cpp.s
+
+src/d2q9_setup.o: src/d2q9_setup.cpp.o
+.PHONY : src/d2q9_setup.o
+
+# target to build an object file
+src/d2q9_setup.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/d2q9_setup.cpp.o
+.PHONY : src/d2q9_setup.cpp.o
+
+src/d2q9_setup.i: src/d2q9_setup.cpp.i
+.PHONY : src/d2q9_setup.i
+
+# target to preprocess a source file
+src/d2q9_setup.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/d2q9_setup.cpp.i
+.PHONY : src/d2q9_setup.cpp.i
+
+src/d2q9_setup.s: src/d2q9_setup.cpp.s
+.PHONY : src/d2q9_setup.s
+
+# target to generate assembly for a file
+src/d2q9_setup.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/d2q9_setup.cpp.s
+.PHONY : src/d2q9_setup.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -201,29 +249,29 @@ src/renderer.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/renderer.cpp.s
 .PHONY : src/renderer.cpp.s
 
-src/simulation_setup.o: src/simulation_setup.cpp.o
-.PHONY : src/simulation_setup.o
+src/tracers_collection.o: src/tracers_collection.cpp.o
+.PHONY : src/tracers_collection.o
 
 # target to build an object file
-src/simulation_setup.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/simulation_setup.cpp.o
-.PHONY : src/simulation_setup.cpp.o
+src/tracers_collection.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/tracers_collection.cpp.o
+.PHONY : src/tracers_collection.cpp.o
 
-src/simulation_setup.i: src/simulation_setup.cpp.i
-.PHONY : src/simulation_setup.i
+src/tracers_collection.i: src/tracers_collection.cpp.i
+.PHONY : src/tracers_collection.i
 
 # target to preprocess a source file
-src/simulation_setup.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/simulation_setup.cpp.i
-.PHONY : src/simulation_setup.cpp.i
+src/tracers_collection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/tracers_collection.cpp.i
+.PHONY : src/tracers_collection.cpp.i
 
-src/simulation_setup.s: src/simulation_setup.cpp.s
-.PHONY : src/simulation_setup.s
+src/tracers_collection.s: src/tracers_collection.cpp.s
+.PHONY : src/tracers_collection.s
 
 # target to generate assembly for a file
-src/simulation_setup.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/simulation_setup.cpp.s
-.PHONY : src/simulation_setup.cpp.s
+src/tracers_collection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lbm-fluid-sim.dir/build.make CMakeFiles/lbm-fluid-sim.dir/src/tracers_collection.cpp.s
+.PHONY : src/tracers_collection.cpp.s
 
 # Help Target
 help:
@@ -237,15 +285,21 @@ help:
 	@echo "... src/d2q9.o"
 	@echo "... src/d2q9.i"
 	@echo "... src/d2q9.s"
+	@echo "... src/d2q9_observables.o"
+	@echo "... src/d2q9_observables.i"
+	@echo "... src/d2q9_observables.s"
+	@echo "... src/d2q9_setup.o"
+	@echo "... src/d2q9_setup.i"
+	@echo "... src/d2q9_setup.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
 	@echo "... src/renderer.o"
 	@echo "... src/renderer.i"
 	@echo "... src/renderer.s"
-	@echo "... src/simulation_setup.o"
-	@echo "... src/simulation_setup.i"
-	@echo "... src/simulation_setup.s"
+	@echo "... src/tracers_collection.o"
+	@echo "... src/tracers_collection.i"
+	@echo "... src/tracers_collection.s"
 .PHONY : help
 
 
