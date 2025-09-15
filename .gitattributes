@@ -1,8 +1,0 @@
-Makefile linguist-language=Makefile
-
-*.cpp linguist-language=C++
-*.h linguist-language=C++
-
-*.py linguist-language=Python
-
-*.txt linguist-vendored
