@@ -10,12 +10,18 @@ periodicity:
 color_map:
   map_filename: "cavern.png"
   colors:
-    - hex: "#FFFFFF"
+    - color: "#FFFFFF"
       type: "FLUID"
       initial_rho: 1.0
       initial_u: [0.1, 0.0]
-    - hex: "#000000"
+    - color: "#000000"
       type: "SOLID"
+
+tracers:
+  color: "#FF00FF"
+  size: 4.0
+  emission_rate: 0
+  random_initial: 0
 
 
 # Visualization and rendering parameters
@@ -29,4 +35,4 @@ render:
     - quantity: "vorticity" # "density", "speed", "vorticity"
       offset: 0.5 # the reference value where the zero of the rendered quantity maps to in [0.0, 1.0]
       amplitude: 0.1 # expected amplitude
-  
+

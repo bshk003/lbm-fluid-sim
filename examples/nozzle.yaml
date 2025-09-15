@@ -4,25 +4,31 @@ simulation_params:
 # Periodic boundary conditions for the grid
 periodicity:
   x: false
-  y: false
+  y: true
 
 # Defines the initial conditions based on a bitmap image
 color_map:
   map_filename: "nozzle.png"
   colors:
-    - hex: "#FFFFFF"
+    - color: "#FFFFFF"
       type: "FLUID"
       initial_rho: 1.0
       initial_u: [0.06, 0.0]
-    - hex: "#000000"
+    - color: "#000000"
       type: "SOLID"
-    - hex: "#00FF00"
+    - color: "#00FF00"
       type: "INFLOW"
       initial_rho: 1.0
       initial_u: [0.08, 0.0]
-    - hex: "#FF00FF"
+    - color: "#FF00FF"
       type: "OUTFLOW"
       initial_rho: 0.001
+
+tracers:
+  color: "#FF00FF"
+  size: 4.0
+  emission_rate: 0.01
+  random_initial: 0 
 
 # Visualization and rendering parameters
 render:
