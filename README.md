@@ -1,6 +1,6 @@
 ## LBM-D2Q9 Simulator
 
-This is a simple 2D fluid dynamics simulator based on the **Lattice Boltzmann Method (LBM)** with a D2Q9 lattice and an OpenGL renderer.
+This is a simple 2D fluid dynamics simulator based on the *Lattice Boltzmann Method (LBM)* with a D2Q9 lattice and an OpenGL renderer.
 
 ---
 
@@ -32,3 +32,9 @@ Use `scripts/prepare_simulation.py` to pack the color-coded simulation domain (s
 
 The CLI usage: `lbm-fluid-sim --input <input_file> --output <output_file.mp4>`.
 
+### References
+[1] Wolf-Gladrow, Dieter (2000). Lattice-Gas Cellular Automata and Lattice Boltzmann Models.
+
+[2] Krüger, T.; Kusumaatmaja, H.; Kuzmin, A.; Shardt, O.; Silva, G.; Viggen, E. M. (2017). The Lattice Boltzmann Method: Principles and Practice.
+
+[3] A very elegant minimalist D2Q9 implementation by Prof. Dan Schroeder: https://physics.weber.edu/schroeder/fluids/ 
