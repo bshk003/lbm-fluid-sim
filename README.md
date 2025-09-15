@@ -16,14 +16,19 @@ This is a simple 2D fluid dynamics simulator based on the **Lattice Boltzmann Me
 - Video recording using FFmpeg.
 - Configurable via YAML: simulation parameters, visualization, tracers, etc.
 
-Demos can be found in the `examples/`.
+![](examples/boltzmann.gif)
+
+![](examples/boltzmann_2.gif)
+
+![](examples/chamber.gif)
+
+More demos are in `examples/`.
 
 ---
 
 ### Usage
 
-Build with CMake:
-```bash
-mkdir build && cd build
-cmake ..
-make
+Use `scripts/prepare_simulation.py` to pack the color-coded simulation domain (stored as an image file) and simulation parameters (in a yaml) to an input binary file.
+
+The CLI usage: `lbm-fluid-sim --input <input_file> --output <output_file.mp4>`.
+
